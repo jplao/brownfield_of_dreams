@@ -1,16 +1,14 @@
 class DashboardFacade
-  def initialize(username)
-    @username = username
-  end
+
 
   def repos
-    data = gh_service.get_repositories(@username)
-    data[0]
+    service = GithubService.new(filter)
+    data = service.get_repositories
   end
 
   private
 
   def gh_service
-    GitHubService.new
+    GithubService.new(filter)
   end
 end
