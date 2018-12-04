@@ -12,7 +12,7 @@ describe 'Github API' do
       repo_list = service.get_repositories
       expect(repo_list.class).to eq(Array)
       expect(repo_list[0][:name]).to eq("activerecord-obstacle-course")
-      expect(repo_list[0][:url]).to eq("https://api.github.com/repos/mmbensalah/activerecord-obstacle-course")
+      expect(repo_list[0][:url]).to eq("https://api.github.com/repos/#{service.filter[:username]}/activerecord-obstacle-course")
     end
   end
 end

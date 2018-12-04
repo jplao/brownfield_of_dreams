@@ -1,4 +1,5 @@
 class GithubService
+  attr_reader :filter
   def initialize(filter)
     @filter = filter
   end
