@@ -1,24 +1,28 @@
 class GithubService
-  attr_reader :filter
-  def initialize(filter)
-    @filter = filter
+
+  def initialize(username)
+    @username = username
   end
 
-  def followers
-    to_json("/users/#{@filter[:username]}/followers?access_token=#{ENV["GITHUB_TOKEN"]}")
+  def get_followers
+    to_json("/users/#{@username}/followers")
   end
 
-  # def following
-  # end
+  def get_following
+    to_json("/users/#{@username}/following")
+  end
 
   def get_repositories
-    to_json("/users/#{@filter[:username]}/repos?access_token=#{ENV["GITHUB_TOKEN"]}")
+    to_json("/users/#{@username}/repos")
   end
 
   private
 
   def conn
-    Faraday.new(url: "https://api.github.com")
+    Faraday.new(url: "https://api.github.com") do |faraday|
+      faraday.params['access_token'] = ENV['GITHUB_TOKEN']
+      faraday.adapter  Faraday.default_adapter
+    end
   end
 
   def to_json(url)
