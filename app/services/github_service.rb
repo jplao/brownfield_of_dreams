@@ -1,26 +1,26 @@
 class GithubService
 
-  def initialize(username)
-    @username = username
+  def initialize(github_token)
+    @github_token = github_token
   end
 
   def get_followers
-    to_json("/users/#{@username}/followers")
+    to_json("/user/followers")
   end
 
   def get_following
-    to_json("/users/#{@username}/following")
+    to_json("/user/following")
   end
 
   def get_repositories
-    to_json("/users/#{@username}/repos")
+    to_json("/user/repos")
   end
 
   private
 
   def conn
     Faraday.new(url: "https://api.github.com") do |faraday|
-      faraday.params['access_token'] = ENV['GITHUB_TOKEN']
+      faraday.params['access_token'] = @github_token
       faraday.adapter  Faraday.default_adapter
     end
   end
