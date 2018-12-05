@@ -14,6 +14,7 @@ class DashboardFacade
     @followers ||= github_service.get_followers.map do |f|
       GithubUser.new(f)
     end
+    @followers.sort_by{ |f| f.login.downcase}
   end
 
   private
