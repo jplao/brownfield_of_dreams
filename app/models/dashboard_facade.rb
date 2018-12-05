@@ -1,14 +1,14 @@
 class DashboardFacade
 
-
-  def repos
-    service = GithubService.new(filter)
-    data = service.get_repositories
+  def repos(username)
+    github_service(username).get_repositories.map do |repo|
+      Repository.new(repo)
+    end
   end
 
   private
 
-  def gh_service
-    GithubService.new(filter)
+  def github_service(username)
+    GithubService.new(username)
   end
 end
