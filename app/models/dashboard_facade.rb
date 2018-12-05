@@ -7,6 +7,7 @@ class DashboardFacade
     @repos ||= github_service.get_repositories.map do |repo|
       Repository.new(repo)
     end
+    @repos.sort_by {|repo| repo.name }
   end
 
   private
