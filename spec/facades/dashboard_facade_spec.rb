@@ -15,8 +15,8 @@ RSpec.describe 'Dashboard Facade' do
     end
 
     it 'should create instances of GithubUsers' do
-      # VCR.use_cassette('User_to_dashboard_followers') do
-        user = create(:user, token: ENV["GITHUB_TOKEN"])
+      VCR.use_cassette('User_to_dashboard_followers') do
+        user = create(:user, token: ENV["GITHUB_TOKEN_1"])
         @service = GithubService.new(user.token)
 
         follower_data = DashboardFacade.new(user).followers
@@ -24,6 +24,6 @@ RSpec.describe 'Dashboard Facade' do
         expect(follower_data.class).to eq(Array)
         expect(follower_data[0]).to be_an_instance_of(GithubUser)
       end
-    # end
+    end
   end
 end
