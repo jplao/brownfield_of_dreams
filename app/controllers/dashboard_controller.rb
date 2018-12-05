@@ -1,5 +1,8 @@
 class DashboardController < ApplicationController
   def show
-    @github_data = DashboardFacade.new(current_user)
+    if current_user.token == nil
+    else
+      @github_data = DashboardFacade.new(current_user)
+    end
   end
 end

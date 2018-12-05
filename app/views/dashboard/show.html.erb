@@ -13,14 +13,16 @@
 </section>
 
 <section>
-  GitHub
-  <div>
-      <% @github_data.repos[0..4].each do |repo| %>
-      <div class = "repository">
-        <%= link_to repo.name, repo.url %>
+  <% if @github_data %>
+    GitHub
+    <div>
+        <% @github_data.repos[0..4].each do |repo| %>
+        <div class = "repository">
+          <%= link_to repo.name, repo.url %>
+        </div>
+      </br>
+        <% end %>
       </div>
-    </br>
-      <% end %>
     </div>
-  </div>
+  <% end %>
 </section>
