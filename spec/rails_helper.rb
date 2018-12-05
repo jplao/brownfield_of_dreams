@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'database_cleaner'
 require 'vcr'
 require 'webmock/rspec'
 
@@ -13,9 +14,11 @@ VCR.configure do |config|
   config.cassette_library_dir = 'spec/cassettes'
   config.hook_into :webmock
   config.configure_rspec_metadata!
+  config.allow_http_connections_when_no_cassette = true
   config.filter_sensitive_data("<YOUTUBE_API_KEY>") { ENV['YOUTUBE_API_KEY'] }
+  config.filter_sensitive_data("<GITHUB_TOKEN>") { ENV['GITHUB_TOKEN'] }
+  config.filter_sensitive_data("<GITHUB_TOKEN_1>") { ENV['GITHUB_TOKEN_1'] }
 end
-
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -48,4 +51,24 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  config.before(:suite) do
+     DatabaseCleaner.clean_with(:truncation)
+   end
+
+   config.before(:each) do
+     DatabaseCleaner.strategy = :transaction
+   end
+
+   config.before(:each, :js => true) do
+     DatabaseCleaner.strategy = :truncation
+   end
+
+   config.before(:each) do
+     DatabaseCleaner.start
+   end
+
+   config.after(:each) do
+     DatabaseCleaner.clean
+   end
 end
