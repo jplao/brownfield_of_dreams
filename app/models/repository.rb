@@ -3,9 +3,9 @@ class Repository
               :name,
               :url
 
-  def initialize(repo_data)
-    @id   = repo_data[:id]
-    @name = repo_data[:name]
-    @url  = repo_data[:url]
+  def initialize(data)
+    @id   = data[:id]
+    @name = data[:name]
+    @url  = data[:url]
   end
 end
