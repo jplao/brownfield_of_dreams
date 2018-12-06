@@ -3,6 +3,12 @@ class DashboardFacade
     @user = user
   end
 
+  def following
+    @github_following ||= github_service.get_following.map do |github_user|
+      GithubUser.new(github_user)
+    end
+  end
+
   def repos
     @repos ||= github_service.get_repositories.map do |repo|
       Repository.new(repo)

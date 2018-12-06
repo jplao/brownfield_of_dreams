@@ -14,16 +14,19 @@
 
 <section class = "github">
   <% if @github_data %>
-    GitHub
+    <h1> GitHub </h1>
     <div>
-        <% @github_data.repos[0..4].each do |repo| %>
-        <div class = "repository">
-          <%= link_to repo.name, repo.url %>
-        </div>
-      </br>
-        <% end %>
+      <h2> Repositories </h2>
+        <ul>
+          <% @github_data.repos[0..4].each do |repo| %>
+            <div class = "repository">
+              <li> <%= link_to repo.name, repo.url %> </li>
+            </div>
+          <% end %>
+        </ul>
       </div>
     </div>
+<<<<<<< HEAD
     Followers
     <div>
       <% @github_data.followers.each do |f| %>
@@ -31,5 +34,20 @@
         <%= link_to f.login, f.url %>
       <% end %>
     </div>
+=======
+
+    <div>
+      <h2> Following </h2>
+        <ul>
+          <% @github_data.following.each do |github_user| %>
+            <div class = "following">
+              <li> <%= link_to github_user.login, github_user.url %> </li>
+            </div>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+>>>>>>> 716b6876f461c2b22118ff82bf45568a66b7f734
   <% end %>
 </section>

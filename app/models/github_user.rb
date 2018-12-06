@@ -1,8 +1,11 @@
 class GithubUser
-  attr_reader :login,
+  attr_reader :id,
+              :login,
               :url
+
   def initialize(data)
-    @login= data[:login]
-    @url  = data[:url]
+    @id = data[:id]
+    @login = data[:login]
+    @url = data[:url]
   end
 end
