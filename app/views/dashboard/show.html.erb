@@ -1,4 +1,8 @@
-<section class="dashboard-main">
+  <div class="align-right table-cell p2">
+    <%= link_to 'Connect to GitHub', "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}", class: "px2"%>
+    <%= link_to 'Register with GitHub', 'https://github.com/join?source=experiment-header-dropdowns-home' %>
+  </div>
+  <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
 
   <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
