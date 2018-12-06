@@ -24,13 +24,13 @@
             </div>
           <% end %>
         </ul>
-      </div>
     </div>
     <h2> Followers </h2>
     <div>
       <% @github_data.followers.each do |f| %>
       <div class = "followers">
         <%= link_to f.login, f.url %>
+      </div>
       <% end %>
     </div>
 
@@ -43,7 +43,6 @@
             </div>
           <% end %>
         </ul>
-      </div>
     </div>
 
   <% end %>
