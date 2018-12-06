@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "User logs in and is taken to their dashboard" do
   it "shows them a list of the Github users they are following" do
-    VCR.use_cassette("Github following") do
+    VCR.use_cassette("Github_following") do
       user = create(:user, token: ENV["GITHUB_TOKEN"])
 
       visit '/login'
