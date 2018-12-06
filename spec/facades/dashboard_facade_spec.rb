@@ -15,7 +15,7 @@ RSpec.describe 'Dashboard Facade' do
     end
 
     it 'should create instances of GithubUsers' do
-      VCR.use_cassette('User_to_dashboard_followers') do
+      VCR.use_cassette('GithubService_followers') do
         user = create(:user, token: ENV["GITHUB_TOKEN_1"])
         @service = GithubService.new(user.token)
 
