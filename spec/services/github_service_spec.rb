@@ -20,15 +20,16 @@ describe 'Github API' do
     end
   end
 
-<<<<<<< HEAD
   it 'returns followers associated with a user' do
-    VCR.use_cassette("GithubService") do
+    VCR.use_cassette("GithubService", :record => :new_episodes) do
       repo_list = @service.get_followers
 
       expect(repo_list.class).to eq(Array)
       expect(repo_list[0].keys).to include(:login)
       expect(repo_list[0].keys).to include(:url)
-=======
+    end
+  end
+
   it 'returns Github users followed by user' do
     VCR.use_cassette("GithubService", :record => :new_episodes) do
       following_list = @service.get_following
@@ -36,7 +37,6 @@ describe 'Github API' do
       expect(following_list.class).to eq(Array)
       expect(following_list[0].keys).to include(:login)
       expect(following_list[0].keys).to include(:url)
->>>>>>> 716b6876f461c2b22118ff82bf45568a66b7f734
     end
   end
 end

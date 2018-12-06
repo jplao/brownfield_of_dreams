@@ -18,20 +18,22 @@
     <div>
       <h2> Repositories </h2>
         <ul>
-          <% @github_data.repos[0..4].each do |repo| %>
+          <% @github_data.repos.each do |repo| %>
             <div class = "repository">
               <li> <%= link_to repo.name, repo.url %> </li>
             </div>
           <% end %>
         </ul>
     </div>
-    <h2> Followers </h2>
     <div>
+    <h2> Followers </h2>
+    <ul>
       <% @github_data.followers.each do |f| %>
       <div class = "followers">
-        <%= link_to f.login, f.url %>
+        <li><%= link_to f.login, f.url %></li>
       </div>
       <% end %>
+    </ul>
     </div>
 
     <div>
