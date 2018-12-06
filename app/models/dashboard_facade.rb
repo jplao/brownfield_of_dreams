@@ -16,6 +16,13 @@ class DashboardFacade
     @repos.sort_by {|repo| repo.name }
   end
 
+  def followers
+    @followers ||= github_service.get_followers.map do |f|
+      GithubUser.new(f)
+    end
+    @followers.sort_by{ |f| f.login.downcase}
+  end
+
   private
   attr_reader :user
 

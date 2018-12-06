@@ -2,7 +2,8 @@ require 'rails_helper'
 
 feature "User logs in and is taken to their dashboard" do
   it "shows them 5 of their own GitHub repository urls" do
-    VCR.use_cassette("User_to_dashboard") do
+    VCR.use_cassette("User_has_user_repos") do
+
       user = create(:user, token: ENV["GITHUB_TOKEN"])
 
       visit '/login'
@@ -48,7 +49,6 @@ feature "User logs in and is taken to their dashboard" do
       expect(current_path).to eq('/dashboard')
       expect(page).to_not have_content('backend-curriculum-site')
       expect(page).to_not have_content('binary_translator')
-
     end
   end
 end
