@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'User sees their GitHub followers on their dashboard' do
   it 'user logs in and is redirected to dashboard' do
-    VCR.use_cassette('GithubService_followers_1') do
+
       user = create(:user, token: ENV["GITHUB_TOKEN_1"])
 
       visit '/login'
@@ -15,6 +15,6 @@ RSpec.describe 'User sees their GitHub followers on their dashboard' do
       expect(current_path).to eq('/dashboard')
       expect(page).to have_content("GitHub")
       expect(page).to have_css(".followers", count: 11)
-    end
+    
   end
 end
