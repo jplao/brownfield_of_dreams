@@ -9,11 +9,11 @@ class DashboardFacade
     end
   end
 
-  def repos
+  def repos(x = 5)
     @repos ||= github_service.get_repositories.map do |repo|
       Repository.new(repo)
     end
-    @repos.sort_by {|repo| repo.name }
+    @repos.sort_by {|repo| repo.name }[0...x]
   end
 
   def followers

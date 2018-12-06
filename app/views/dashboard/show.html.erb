@@ -18,7 +18,7 @@
     <div>
       <h2> Repositories </h2>
         <ul>
-          <% @github_data.repos[0..4].each do |repo| %>
+          <% @github_data.repos.each do |repo| %>
             <div class = "repository">
               <li> <%= link_to repo.name, repo.url %> </li>
             </div>
