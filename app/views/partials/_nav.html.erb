@@ -17,9 +17,13 @@
       </div>
       <% end %>
     <% else %>
-      <div class="align-middle table-cell p3">
+      <div class="align-right table-cell p2">
         <%= link_to 'Sign In', login_path, class: "px2"%>
         <%= link_to 'Register', register_path %>
+      </div>
+      <div class="align-right table-cell p2">
+        <%= link_to 'Connect to GitHub', "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}", class: "px2"%>
+        <%= link_to 'Register with GitHub', 'https://github.com/join?source=experiment-header-dropdowns-home' %>
       </div>
     <% end %>
   </section>
