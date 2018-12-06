@@ -6,6 +6,6 @@ class GithubUser
   def initialize(data)
     @id = data[:id]
     @login = data[:login]
-    @url = data[:url]
+    @url = data[:html_url]
   end
 end
