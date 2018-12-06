@@ -19,4 +19,14 @@ describe 'Github API' do
       expect(repo_list[0].keys).to include(:url)
     end
   end
+
+  it 'returns followers associated with a user' do
+    VCR.use_cassette("GithubService") do
+      repo_list = @service.get_followers
+
+      expect(repo_list.class).to eq(Array)
+      expect(repo_list[0].keys).to include(:login)
+      expect(repo_list[0].keys).to include(:url)
+    end
+  end
 end
