@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   root 'welcome#index'
-  get '/auth/github/callback', to: 'sessions#create'
+  get '/auth/github/callback', to: 'github/sessions#create'
   get 'tags/:tag', to: 'welcome#index', as: :tag
   get '/register', to: 'users#new'
 
