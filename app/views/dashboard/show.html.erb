@@ -1,7 +1,3 @@
-  <div class="align-right table-cell p2">
-    <%= link_to 'Connect to GitHub', "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}", class: "px2"%>
-    <%= link_to 'Register with GitHub', 'https://github.com/join?source=experiment-header-dropdowns-home' %>
-  </div>
   <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
 
@@ -14,42 +10,44 @@
   <section>
     <h1>Bookmarked Segments</h1>
   </section>
-</section>
 
-<section class = "github">
-  <% if @github_data %>
-    <h1> GitHub </h1>
-    <div>
-      <h2> Repositories </h2>
-        <ul>
-          <% @github_data.repos.each do |repo| %>
-            <div class = "repository">
-              <li> <%= link_to repo.name, repo.url %> </li>
-            </div>
-          <% end %>
-        </ul>
-    </div>
-    <div>
-    <h2> Followers </h2>
-    <ul>
-      <% @github_data.followers.each do |f| %>
-      <div class = "followers">
-        <li><%= link_to f.login, f.url %></li>
+  <section class = "github">
+    <% if @github_data %>
+      <h1> GitHub </h1>
+      <div>
+        <h2> Repositories </h2>
+          <ul>
+            <% @github_data.repos.each do |repo| %>
+              <div class = "repository">
+                <li> <%= link_to repo.name, repo.url %> </li>
+              </div>
+            <% end %>
+          </ul>
       </div>
-      <% end %>
-    </ul>
-    </div>
+      <div>
+      <h2> Followers </h2>
+      <ul>
+        <% @github_data.followers.each do |f| %>
+        <div class = "followers">
+          <li><%= link_to f.login, f.url %></li>
+        </div>
+        <% end %>
+      </ul>
+      </div>
 
-    <div>
-      <h2> Following </h2>
-        <ul>
-          <% @github_data.following.each do |github_user| %>
-            <div class = "following">
-              <li> <%= link_to github_user.login, github_user.url %> </li>
-            </div>
-          <% end %>
-        </ul>
-    </div>
-
-  <% end %>
+      <div>
+        <h2> Following </h2>
+          <ul>
+            <% @github_data.following.each do |github_user| %>
+              <div class = "following">
+                <li> <%= link_to github_user.login, github_user.url %> </li>
+              </div>
+            <% end %>
+          </ul>
+      </div>
+      <% else %>
+      <%= link_to 'Connect to GitHub', "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}", class: "px2"%>
+      <%= link_to 'Register with GitHub', 'https://github.com/join?source=experiment-header-dropdowns-home' %>
+    <% end %>
+  </section>
 </section>
