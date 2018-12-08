@@ -2,10 +2,7 @@ class Github::SessionsController < ApplicationController
 
   def create
    auth = request.env["omniauth.auth"]
-   session[:user_id] = current_user.id
-   current_user.uid = auth["uid"]
-   current_user.token = auth["credentials"]["token"]
-   current_user.save
+   current_user.github_connect(auth)
    redirect_to dashboard_path, :notice => "Successfully connected through GitHub"
   end
 
