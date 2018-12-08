@@ -29,7 +29,8 @@
       <ul>
         <% @github_data.followers.each do |f| %>
         <div class = "followers">
-          <li><%= link_to f.login, f.url %></li>
+          <li><%= link_to f.login, f.url %>----------------
+              <%= link_to "Add Friend", friendship_path(friend_id: :user), method: :post %></li>
         </div>
         <% end %>
       </ul>
