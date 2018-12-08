@@ -9,6 +9,17 @@ require 'database_cleaner'
 require 'vcr'
 require 'webmock/rspec'
 
+OmniAuth.config.test_mode = true
+omniauth_hash = { 'provider' => 'github',
+                  'uid' => '12345',
+                  'info' => {
+                      'name' => 'test',
+                      'email' => 'test@email.com',
+                  }
+                }
+
+OmniAuth.config.add_mock(:github, omniauth_hash)
+
 VCR.configure do |config|
   config.ignore_localhost = true
   config.cassette_library_dir = 'spec/cassettes'

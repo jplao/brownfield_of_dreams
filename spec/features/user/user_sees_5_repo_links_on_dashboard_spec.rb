@@ -12,7 +12,7 @@ feature "User logs in and is taken to their dashboard" do
       fill_in :session_password, with: user.password
 
       click_on 'Log In'
-      save_and_open_page
+
       expect(current_path).to eq('/dashboard')
 
       expect(page).to have_content("GitHub")
