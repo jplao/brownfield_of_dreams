@@ -8,7 +8,7 @@ RSpec.describe 'User can connect to Github' do
   end
 
   it 'sees a link to connect to github' do
-    user = create(:user)
+    user = create(:user, email: 'test@email.com')
     visit login_path
     fill_in :session_email,    with: user.email
     fill_in :session_password, with: user.password
