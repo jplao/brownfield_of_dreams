@@ -24,6 +24,15 @@ RSpec.describe 'User can add a friend' do
       within('#averimj') do
         expect(page).to_not have_link('Add Friend')
       end
+
+      within('#jplao.following') do
+        click_on 'Add Friend'
+      end
+
+      within('.friends') do
+        expect(page).to have_content(user_2.first_name)
+        expect(page).to have_content(user_2.last_name)
+      end
     end
   end
 end
