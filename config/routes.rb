@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'tags/:tag', to: 'welcome#index', as: :tag
   get '/register', to: 'users#new'
   get '/friendship', to: 'friendships#create'
+  post '/friendship', to: 'friendships#create'
 
   namespace :admin do
     get "/dashboard", to: "dashboard#show"
