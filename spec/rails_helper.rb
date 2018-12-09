@@ -10,18 +10,19 @@ require 'vcr'
 require 'webmock/rspec'
 
 OmniAuth.config.test_mode = true
-OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
-  { 'provider'    => 'github',
-    'uid'         => '12345',
-    'info'        => {
-      'name' => 'natasha',
-      'email' => 'hi@natashatherobot.com',
-      'nickname' => 'NatashaTheRobot'
-    },
-    'credentials' =>  {
-      'token' => 'aaabbb'
-    }
-    })
+omniauth_hash = { 'provider' => 'github',
+
+                  'uid' => '12345',
+                  'info' => {
+                      'name' => 'test',
+                      'email' => 'test@email.com'
+                  },
+                  'credentials' => {
+                    'token' => ENV['GITHUB_TOKEN']
+                  }
+
+                }.with_indifferent_access
+
 OmniAuth.config.add_mock(:github, omniauth_hash)
 
 VCR.configure do |config|
