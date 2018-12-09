@@ -1,7 +1,11 @@
+require 'rubygems'
+
 
 # require 'database_cleaner'
 # DatabaseCleaner.strategy = :truncation
 RSpec.configure do |config|
+
+
 
   # config.before(:suite) do
   #    DatabaseCleaner.clean_with(:truncation)

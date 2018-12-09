@@ -14,7 +14,7 @@ RSpec.describe 'User sees their GitHub followers on their dashboard' do
 
       expect(current_path).to eq('/dashboard')
       expect(page).to have_content("GitHub")
-      expect(page).to have_css(".followers", count: 11)
-    
+      expect(page).to have_css(".followers", count: 12)
+
   end
 end
