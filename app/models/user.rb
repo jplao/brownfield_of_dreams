@@ -22,4 +22,12 @@ class User < ApplicationRecord
   def self.uid_lookup(github_user)
     find_by(uid: github_user.uid)
   end
+
+  def list_ordered_videos
+    UserVideo.where(user_id: self.id)
+    .joins(:video)
+    .order('videos.tutorial_id asc', 'videos.position asc')
+    .pluck(:title)
+  end
+
 end
