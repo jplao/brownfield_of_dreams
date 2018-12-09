@@ -18,4 +18,8 @@ class User < ApplicationRecord
     self.token = auth["credentials"]["token"]
     self.save
   end
+
+  def self.uid_lookup(github_user)
+    find_by(uid: github_user.uid)
+  end
 end
