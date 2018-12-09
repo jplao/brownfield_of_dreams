@@ -10,8 +10,8 @@
   <section>
     <h1>Bookmarked Segments</h1>
     <% if current_user.videos %>
-      <% current_user.user_videos.each do |user_video| %>
-        <%= Video.find(user_video.video_id).title%>
+      <% current_user.list_ordered_videos.each do |title| %>
+        <li> <%= title %> </li>
       <% end %>
     <% end %>
 
