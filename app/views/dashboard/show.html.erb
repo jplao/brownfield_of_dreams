@@ -24,6 +24,7 @@
             <% end %>
           </ul>
       </div>
+
       <div>
         <h2> Followers </h2>
         <ul>
@@ -46,13 +47,22 @@
               <div class = "following", id = "<%= github_user.login %>">
                 <li> <%= link_to github_user.login, github_user.url %>
                 <% if User.uid_lookup(github_user) != nil%>
-                  ----------------<%= link_to "Add Friend", friendship_path(friend_id: :user), method: :post %>
+                  ----------------<%= link_to "Add Friend", friendship_path(friend_id: User.uid_lookup(github_user).id), method: :post %>
                 </li>
                 <% end %>
               </div>
             <% end %>
           </ul>
       </div>
+
+      <div class = "friends">
+        <h2> Friends </h2>
+        <% current_user.friendships.each do |friendship| %>
+          <li><%= friendship.friend.first_name %>
+              <%= friendship.friend.last_name %></li>
+        <% end %>
+      </div>
+
       <% else %>
       <%= link_to 'Connect to GitHub', '/auth/github', class: "px2"%>
       <%= link_to 'Register with GitHub', 'https://github.com/join?source=experiment-header-dropdowns-home' %>
