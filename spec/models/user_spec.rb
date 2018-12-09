@@ -22,4 +22,18 @@ RSpec.describe User, type: :model do
       expect(admin.admin?).to be_truthy
     end
   end
+
+  describe '#instance methods' do
+    it 'list_ordered_videos' do
+      user = create(:user)
+      video_1, video_2, video_3, video_4, video_5 = create_list(:video, 5)
+      user_video_1 = create(:user_video, user: user, video: video_1)
+      user_video_2 = create(:user_video, user: user, video: video_2)
+      user_video_3 = create(:user_video, user: user, video: video_3)
+      user_video_4 = create(:user_video, user: user, video: video_4)
+
+      expect(user.list_ordered_videos).to include(video_1.title, video_2.title, video_3.title, video_4.title)
+      expect(user.list_ordered_videos).to_not include(video_5.title)
+    end
+  end
 end
