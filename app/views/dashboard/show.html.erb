@@ -9,6 +9,12 @@
   </ul>
   <section>
     <h1>Bookmarked Segments</h1>
+    <% if current_user.videos %>
+      <% current_user.user_videos.each do |user_video| %>
+        <%= Video.find(user_video.video_id).title%>
+      <% end %>
+    <% end %>
+
   </section>
 
   <section class = "github">
