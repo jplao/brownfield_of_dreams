@@ -37,8 +37,8 @@
           <% @github_data.followers.each do |github_user| %>
           <div class = "followers", id = "<%= github_user.login %>">
             <li><%= link_to github_user.login, github_user.url %>
-              <% if User.uid_lookup(github_user) != nil%>
-                ----------------<%= link_to "Add Friend", friendship_path(friend_id: :user), method: :post %>
+              <% if github_user.user_uid_lookup != nil%>
+                ----------------<%= link_to "Add Friend", friendship_path(friend_id: github_user.user_uid_lookup), method: :post %>
             </li>
               <% end %>
         </div>
@@ -52,8 +52,8 @@
             <% @github_data.following.each do |github_user| %>
               <div class = "following", id = "<%= github_user.login %>">
                 <li> <%= link_to github_user.login, github_user.url %>
-                <% if User.uid_lookup(github_user) != nil%>
-                  ----------------<%= link_to "Add Friend", friendship_path(friend_id: User.uid_lookup(github_user).id), method: :post %>
+                <% if github_user.user_uid_lookup != nil%>
+                  ----------------<%= link_to "Add Friend", friendship_path(friend_id: github_user.user_uid_lookup.id), method: :post %>
                 </li>
                 <% end %>
               </div>
