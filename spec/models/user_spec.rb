@@ -3,8 +3,16 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'validations' do
     it {should validate_presence_of(:email)}
+    it {should validate_uniqueness_of(:email)}
     it {should validate_presence_of(:first_name)}
     it {should validate_presence_of(:password)}
+  end
+
+  describe 'relationships' do
+    it {should have_many :user_videos}
+    it {should have_many(:videos).through(:user_videos)}
+    it {should have_many :friendships}
+    it {should have_many(:friends).through(:friendships)}
   end
 
   describe 'roles' do
@@ -34,6 +42,21 @@ RSpec.describe User, type: :model do
 
       expect(user.list_ordered_videos).to include(video_1.title, video_2.title, video_3.title, video_4.title)
       expect(user.list_ordered_videos).to_not include(video_5.title)
+    end
+
+    it 'github_connect' do
+      user = create(:user)
+      expect(user.uid).to eq(nil)
+      expect(user.token).to eq(nil)
+      auth = { 'provider' => 'github',
+                'uid' => '12345',
+                'credentials' =>
+                {'token' => ENV['GITHUB_TOKEN']}
+              }
+      user.github_connect(auth)
+
+      expect(user.uid).to eq(auth['uid'])
+      expect(user.token).to eq(ENV['GITHUB_TOKEN'])
     end
   end
 end
