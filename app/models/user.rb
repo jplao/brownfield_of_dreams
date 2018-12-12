@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :activation_digest
   before_create :create_activation_digest
 
   has_many :user_videos
