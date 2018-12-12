@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token, :activation_token
+  before_create :create_activation_digest
+
   has_many :user_videos
   has_many :videos, through: :user_videos
   has_many :friendships
@@ -24,6 +27,37 @@ class User < ApplicationRecord
     .joins(:video)
     .order('videos.tutorial_id asc', 'videos.position asc')
     .pluck(:title)
+  end
+
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                 BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def activate
+    update_columns(activated: FILL_IN, activated_at: FILL_IN)
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  private
+
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 
 end
