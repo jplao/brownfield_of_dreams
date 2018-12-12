@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   get '/login', to: "sessions#new"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
-
+  resources :account_activations, only: [:edit]
+  
   get '/dashboard', to: 'dashboard#show'
   get '/about', to: 'about#show'
   get '/get_started', to: 'get_started#show'

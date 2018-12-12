@@ -58,5 +58,10 @@ RSpec.describe User, type: :model do
       expect(user.uid).to eq(auth['uid'])
       expect(user.token).to eq(ENV['GITHUB_TOKEN'])
     end
+
+    it 'authenticated?' do
+      user = create(:user)
+      expect(user.authenticated?('')).to eq(false)
+    end
   end
 end
