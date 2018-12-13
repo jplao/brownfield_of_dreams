@@ -6,7 +6,6 @@ RSpec.describe 'User can see tutorials' do
     tutorial_3, tutorial_4 = create_list(:tutorial, 2, classroom: true)
 
     visit root_path
-    save_and_open_page
 
     expect(page).to have_content(tutorial_1.title)
     expect(page).to have_content(tutorial_2.title)
