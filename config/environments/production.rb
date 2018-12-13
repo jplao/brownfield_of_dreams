@@ -6,7 +6,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
   config.action_mailer.delivery_method = :smtp
-  host = 'sheltered-sands-76845.herokuapp.com'
+  host = 'serene-depths-68097.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
       config.action_mailer.smtp_settings = {
         address:              'smtp.sendgrid.net',
