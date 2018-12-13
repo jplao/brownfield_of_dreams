@@ -2,27 +2,27 @@ Rails.application.configure do
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = false
   # Settings specified here will take precedence over those in config/application.rb.
+  config.eager_load = true
 
   # Code is not reloaded between requests.
-  config.cache_classes = true
-  config.action_mailer.delivery_method = :smtp
-  host = 'serene-depths-68097.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
-      config.action_mailer.smtp_settings = {
-        address:              'smtp.sendgrid.net',
-        port:                 '587',
-        domain:               'heroku.com',
-        user_name:            ENV["SENDGRID_USERNAME"],
-        password:             ENV["SENDGRID_PASSWORD"],
-        authentication:       'plain',
-        enable_starttls_auto: true
-      }
+  config.action_mailer.raise_delivery_errors = true
+config.action_mailer.delivery_method = :smtp
+host = 'serene-depths-68097.herokuapp.com'
+config.action_mailer.default_url_options = { host: host }
+ActionMailer::Base.smtp_settings = {
+  :address        => 'smtp.sendgrid.net',
+  :port           => '587',
+  :authentication => 'plain',
+  :user_name      => ENV['SENDGRID_USERNAME'],
+  :password       => ENV['SENDGRID_PASSWORD'],
+  :domain         => 'heroku.com',
+  :enable_starttls_auto => true
+}
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
-  config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
