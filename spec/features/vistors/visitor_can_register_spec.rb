@@ -25,8 +25,13 @@ describe 'vister can create an account', :js do
     fill_in 'user[password_confirmation]', with: password
 
     click_on'Create Account'
+    expect(current_path).to eq(root_path)
+    User.last.update(:activated => true)
 
-    expect(current_path).to eq(dashboard_path)
+    visit login_path
+    fill_in 'session[email]', with: email
+    fill_in 'session[password]', with: password
+    click_on 'Log In'
 
     expect(page).to have_content(email)
     expect(page).to have_content(first_name)

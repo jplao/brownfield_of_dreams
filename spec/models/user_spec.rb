@@ -60,8 +60,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'authenticated?' do
-      user = create(:user)
-      expect(user.authenticated?('')).to eq(false)
+      user = create(:user, activated: false)
+      expect(user.authenticated?('activation', '')).to eq(false)
     end
   end
 end
