@@ -9,11 +9,4 @@ class FriendshipsController < ApplicationController
       redirect_to dashboard_path
     end
   end
-
-  def destroy
-    @friendship = current_user.friendships.find(params[:id])
-    @friendship.destroy
-    flash[:notice] = "Removed friendship."
-    redirect_to dashboard_path
-  end
 end
