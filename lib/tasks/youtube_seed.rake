@@ -37,4 +37,10 @@ namespace :import do
       end
     end
   end
+
+  desc 'Update video position values that are nil'
+  task :update_video_position => [:environment] do
+    video = Video.find_by(position: nil)
+    video.update_attribute(:position, video.max_position)
+  end
 end
