@@ -53,11 +53,9 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
-  private
-
   def create_activation_digest
-    self.activation_token  = User.new_token
-    self.activation_digest = User.digest(activation_token)
+    activation_token  = User.new_token
+    activation_digest = User.digest(activation_token)
   end
 
 end
