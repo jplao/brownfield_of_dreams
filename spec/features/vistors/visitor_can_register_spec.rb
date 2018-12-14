@@ -45,6 +45,19 @@ describe 'vister can create an account', :js do
     expect(page).to have_content("Check your email for the activation link.")
   end
 
+  it 'shows error if activation link is bad' do
+    user = create(:user, activated: false)
+    visit edit_account_activation_path(user)
+    expect(page).to have_content("Invalid activation link")
+  end
+
+  it 'shows account is activated' do
+    user = create(:user, activated: false, activation_token: '12345')
+    params = {email: user[:email], id: user[:activation_token]}
+    visit edit_account_activation_path(params)
+    expect(page).to have_content("Account activated!")
+  end
+
   it 'does not allow you to register if email is taken' do
     visit register_path
 
@@ -54,7 +67,7 @@ describe 'vister can create an account', :js do
     fill_in 'user[password]', with: '1234'
     fill_in 'user[password_confirmation]', with: '1234'
     click_on'Create Account'
-    
+
     expect(page).to have_content('Username already exists')
     expect(current_path).to eq(register_path)
   end
