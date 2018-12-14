@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get '/auth/github/callback', to: 'github/sessions#create'
-  get 'tags/:tag', to: 'welcome#index', as: :tag
-  get '/register', to: 'users#new'
-  get '/friendship', to: 'friendships#create'
-  post '/friendship', to: 'friendships#create'
+  get 'tags/:tag',             to: 'welcome#index', as: :tag
+  get '/register',             to: 'users#new'
+  get '/friendship',           to: 'friendships#create'
+  post '/friendship',          to: 'friendships#create'
 
   namespace :admin do
     get "/dashboard", to: "dashboard#show"
@@ -27,22 +27,21 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/login', to: "sessions#new"
-  post '/login', to: "sessions#create"
-  delete '/logout', to: "sessions#destroy"
+  get '/login',         to: "sessions#new"
+  post '/login',        to: "sessions#create"
+  delete '/logout',     to: "sessions#destroy"
   resources :account_activations, only: [:edit]
-  
-  get '/dashboard', to: 'dashboard#show'
-  get '/about', to: 'about#show'
-  get '/get_started', to: 'get_started#show'
 
-  # Is this being used?
-  get '/video', to: 'video#show'
+  get '/dashboard',     to: 'dashboard#show'
+  get '/invite',        to: 'invite#show'
+  get '/create_invite', to: 'invite#create', as: 'create_invite'
+  get '/about',         to: 'about#show'
+  get '/get_started',   to: 'get_started#show'
 
   resources :users, only: [:new, :create, :update, :edit]
 
   resources :tutorials, only: [:show, :index] do
-    resources :videos, only: [:show, :index]
+    resources :videos,  only: [:show, :index]
   end
 
   resources :user_videos, only:[:create, :destroy]

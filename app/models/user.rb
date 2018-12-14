@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token, :activation_digest
+  # attr_accessor :remember_token, :activation_token, :activation_digest
   before_create :create_activation_digest
 
   has_many :user_videos
@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                 BCrypt::Engine.cost
+                                                  BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
@@ -53,11 +53,8 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
-  private
-
   def create_activation_digest
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
-
 end

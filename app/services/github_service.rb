@@ -16,6 +16,10 @@ class GithubService
     to_json("/user/repos")
   end
 
+  def get_email(invitee)
+    to_json("/users/#{invitee}")
+  end
+
   private
   attr_reader :github_token
 
