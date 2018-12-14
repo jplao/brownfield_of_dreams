@@ -23,6 +23,10 @@ class DashboardFacade
     @followers.sort_by{ |f| f.login.downcase}
   end
 
+  def github_invitee(invitee)
+    @invitee_info ||= github_service.get_email(invitee)
+  end
+
   private
   attr_reader :user
 
