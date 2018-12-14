@@ -1,0 +1,10 @@
+<div>
+  <ul>
+    <%= form_tag(create_invite_path, :method => "get") do %>
+      <div>
+        <%= text_field_tag(:github_handle, "Search github user") %>
+          <%= submit_tag "Send Invite", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </ul>
+</div>
